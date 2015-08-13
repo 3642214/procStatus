@@ -21,7 +21,7 @@ tmp_diskIO_array=(0 0 0 0)
 #net_in net_out
 tmp_netIO_array=(0 0)
 function initLogFile() {
-    echo "PID,%CPU,%MEM,VSZ,RSS,rchar($diskUnitName),wchar($diskUnitName),rbytes($diskUnitName),wbytes($diskUnitName),netIN(MB),netOUT(MB),used(MB),buffers(MB),cached(MB)" > $logFileName
+    echo "Time,PID,%CPU,%MEM,VSZ,RSS,rchar($diskUnitName),wchar($diskUnitName),rbytes($diskUnitName),wbytes($diskUnitName),netIN(MB),netOUT(MB),used(MB),buffers(MB),cached(MB)" > $logFileName
 }
 function log() {
     echo $1  >> $logFileName
@@ -64,7 +64,8 @@ while true
 do
     diskIO_array=(`getDiskIO`)
     netIO_array=(`getNetIO`)
-    log "`ps -p $pid u | sed -n 2p | awk '{print $2,$3,$4,$5,$6}' | sed 's/ /,/g'`, \
+    log "`date +%H-%M-%S`, \
+	     `ps -p $pid u | sed -n 2p | awk '{print $2,$3,$4,$5,$6}' | sed 's/ /,/g'`, \
          `calculateDisk ${diskIO_array[0]} ${tmp_diskIO_array[0]}`, \
          `calculateDisk ${diskIO_array[1]} ${tmp_diskIO_array[1]}`, \
          `calculateDisk ${diskIO_array[2]} ${tmp_diskIO_array[2]}`, \
