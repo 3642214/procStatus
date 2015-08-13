@@ -65,7 +65,7 @@ do
     diskIO_array=(`getDiskIO`)
     netIO_array=(`getNetIO`)
     log "`date +%H-%M-%S`, \
-	     `ps -p $pid u | sed -n 2p | awk '{print $2,$3,$4,$5,$6}' | sed 's/ /,/g'`, \
+	 `ps -p $pid u | sed -n 2p | awk '{print $2,$3,$4,$5,$6}' | sed 's/ /,/g'`, \
          `calculateDisk ${diskIO_array[0]} ${tmp_diskIO_array[0]}`, \
          `calculateDisk ${diskIO_array[1]} ${tmp_diskIO_array[1]}`, \
          `calculateDisk ${diskIO_array[2]} ${tmp_diskIO_array[2]}`, \
